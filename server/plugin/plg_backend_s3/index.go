@@ -461,6 +461,7 @@ func (s S3Backend) Save(path string, file io.Reader) error {
 		Body:   file,
 		Bucket: aws.String(p.bucket),
 		Key:    aws.String(p.path),
+		ContentType: aws.String(GetMimeType(filepath.Ext(path))),
 	}
 	if s.params["encryption_key"] != "" {
 		input.SSECustomerAlgorithm = aws.String("AES256")
